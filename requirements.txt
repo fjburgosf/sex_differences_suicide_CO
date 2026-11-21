@@ -1,0 +1,14 @@
+arviz==1.3.0
+geopandas==1.2.0
+jax==0.12.0.1
+jaxlib==0.12.0.1
+libpysal==4.15.1
+numpy==2.5.5
+numpyro==0.22.0
+openpyxl==3.1.5
+pandas==3.1.1
+pyarrow==26.0.1
+pyproj==3.8.0
+requests==2.34.2
+scipy==1.18.1
+shapely==2.2.0

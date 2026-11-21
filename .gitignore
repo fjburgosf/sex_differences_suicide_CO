@@ -1,0 +1,6 @@
+# source data and outputs are not redistributed
+data/
+results/
+.venv/
+__pycache__/
+*.pyc
