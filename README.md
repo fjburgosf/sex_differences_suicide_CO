@@ -81,12 +81,11 @@ python src/08b_excluded_residence.py
 | `A_rho_uniform` | Beta(1, 1) prior for the mixing parameter ρ |
 | `A_knn6` | Graph of the six nearest municipalities |
 | `A_ipm_rural` | IPM and rural share in the same model |
-| `A_negbin_hn` | Negative binomial likelihood with a half-normal prior on overdispersion |
 | `A_main_ppc`, `B_main_ppc` | Same as the main models (posterior predictive checks by stratum of expected deaths are written by every run) |
 
 Each run uses four chains of 4000 warm-up and 12 000 sampling iterations with a fixed seed (20261118), and reports
 R̂, effective sample sizes, divergent transitions and posterior predictive checks in `summary.json`. A main model
-took about 20 minutes on a desktop computer; the negative binomial runs take longer. `--low-priority` runs the models
+took about 20 minutes on a desktop computer; the negative binomial runs take several hours. `--low-priority` runs the models
 at below-normal CPU priority on Windows.
 
 ## Deprivation indicators
