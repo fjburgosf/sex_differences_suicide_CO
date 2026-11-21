@@ -33,7 +33,8 @@ EXTRA_RUNS = {"A_main_ppc": ["--covs", "ipm"],                               # s
           "B_main_ppc": ["--covs", "B"],
           "A_rho_uniform": ["--covs", "ipm", "--rho-prior", "uniform"],   # Beta(1, 1) prior for rho
           "A_knn6": ["--covs", "ipm", "--adjacency", "knn6"],             # six-nearest-neighbour graph
-          "A_ipm_rural": ["--covs", "ipm,rural_share"]}                   # IPM and rural share jointly
+          "A_ipm_rural": ["--covs", "ipm,rural_share"],                   # IPM and rural share jointly
+          "A_main_ta95": ["--covs", "ipm", "--target-accept", "0.95"]}    # divergence check (target acceptance 0.95)
 RUNS.update(EXTRA_RUNS)
 
 

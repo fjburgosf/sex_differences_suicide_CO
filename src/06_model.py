@@ -123,6 +123,7 @@ def main():
     ap.add_argument("--tag", required=True)
     ap.add_argument("--progress", action="store_true", help="show the sampler progress bar (written to the log)")
     ap.add_argument("--max-tree-depth", type=int, default=10, help="NUTS maximum tree depth (default 10)")
+    ap.add_argument("--target-accept", type=float, default=0.9, help="NUTS target acceptance probability")
     ap.add_argument("--rho-prior", default="beta05", choices=["beta05", "uniform"])
     ap.add_argument("--adjacency", default="main", choices=["main", "knn6"])
     ap.add_argument("--nb-prior", default="exponential", choices=["exponential", "halfnormal"])
@@ -153,7 +154,7 @@ def main():
         init |= {"rho": jnp.full(S, 0.5), "phi": jnp.zeros((S, n))}
     if a.negbin:
         init["inv_k"] = jnp.full(S, 0.1)
-    kernel = NUTS(model, target_accept_prob=0.9, init_strategy=init_to_value(values=init),
+    kernel = NUTS(model, target_accept_prob=a.target_accept, init_strategy=init_to_value(values=init),
                   max_tree_depth=a.max_tree_depth)
     mcmc = MCMC(kernel, num_warmup=a.warmup, num_samples=a.draws, num_chains=4,
                 chain_method="parallel", progress_bar=a.progress)
@@ -243,7 +244,7 @@ def main():
                "E_total": {s: round(float(E[si].sum()), 2) for si, s in enumerate(SEXES)},
                "scaling_factor": c, "rho_prior": a.rho_prior, "adjacency": a.adjacency, "nb_prior": a.nb_prior,
                "divergences_by_chain": np.asarray(mcmc.get_extra_fields(group_by_chain=True)["diverging"]).sum(axis=1).tolist(),
-               "chains": 4, "warmup": a.warmup, "draws": a.draws, "max_tree_depth": a.max_tree_depth, "seed": SEED,
+               "chains": 4, "warmup": a.warmup, "draws": a.draws, "max_tree_depth": a.max_tree_depth, "target_accept": a.target_accept, "seed": SEED,
                "diagnostics": diag, "ppc": ppc, "rr_per_sd": res, "hyper_median_lo_hi": hyper,
                "runtime_min": round((time.time() - t0) / 60, 1)}
     (out / "summary.json").write_text(json.dumps(summary, indent=1, default=float), encoding="utf-8")

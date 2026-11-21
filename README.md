@@ -81,6 +81,7 @@ python src/08b_excluded_residence.py
 | `A_rho_uniform` | Beta(1, 1) prior for the mixing parameter ρ |
 | `A_knn6` | Graph of the six nearest municipalities |
 | `A_ipm_rural` | IPM and rural share in the same model |
+| `A_main_ta95` | Model A with a NUTS target acceptance probability of 0.95 (divergence check) |
 | `A_main_ppc`, `B_main_ppc` | Same as the main models (posterior predictive checks by stratum of expected deaths are written by every run) |
 
 Each run uses four chains of 4000 warm-up and 12 000 sampling iterations with a fixed seed (20261118), and reports
@@ -91,5 +92,5 @@ at below-normal CPU priority on Windows.
 ## Deprivation indicators
 
 In the census-based IPM, deprivation is identified at the household level: a household is deprived in an indicator
-when at least one member meets its condition, and all its members are counted as deprived. The municipal indicators
+when it meets the condition of that indicator, usually defined by at least one member, and all its members are counted as deprived. The municipal indicators
 are therefore percentages of persons living in deprived households, not individual coverage measures.
